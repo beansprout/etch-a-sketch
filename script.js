@@ -1,57 +1,50 @@
+//-------- define colors-----------
+const bgColor = '#3bb4c1'; // grid box color
+const color1 = '#3bb4c1'; // h1 color
+const color2 = '#b5e0ba'; // button background
+const color3 = '#e9e4e6'; // button shadow
+const color4 = '#f6f5f5';
+const color5 = '#33313b';
+
+const varyColor = () => {
+  let color = Math.floor((Math.random()*1e5));
+  const hue = Math.floor((Math.random()*6));
+  console.log(color)
+  if (color.toString().length === 4) {
+    color = 'f'+color;
+  }
+    switch (hue) {
+      case 1: return '#f' + color;
+      case 2: return '#1' + color;
+      case 3: return '#0' + color;
+      case 4: return '#c' + color;
+      case 5: return '#b' + color;
+      default: return '#2' +color;
+    }
+}
+
+// --------- sound ----------------
+const bleep = new Audio();
+bleep.src = 'lesser_vibes_HTIS_Buttons_59_013.mp3';
+
+// --------misc -------------------
+document.querySelector('h1').style.color = color1;
+document.querySelector('body').style.backgroundColor = color5;
+const numOfButtons = 3;
+
+//--------- containers -------------
 const container = document.getElementById('container');
 const rightContainer = document.getElementById('right-container');
 // define container as grid
 container.style.display = 'grid';
 container.style.width = '1060px';
 // set column and row sizes
-const x = 16 // grid size example 2 equals 2x2 grid
-const colSize = 100 / x; //100% divided by x divs
-const rowSize = 100 / x; //100% divided x divs
-container.style.gridTemplateColumns = "repeat("+x+", "+colSize+"%)";
-// container.style.gridTemplateRows = "repeat("+x+", "+rowSize+"%)";
-// container.style.gridTemplateColumns = "repeat("+x+", 60px)";
-container.style.gridTemplateRows = "repeat("+x+", 60px)";
-container.style.gridColumnGap = '10px';
-container.style.gridRowGap = '10px';
+let gridSize = 4 // grid size example 2 equals 2x2 grid
 
-const createGrid = (gridSize) => {
-  let grid;
-  for (let i = 0; i < gridSize; i++) {
-    grid = document.createElement('div');
-    container.appendChild(grid);
-    if (i >= 0 && i <= 15) {
-      grid.className += 'row1 ';
-    }
-    if (i >=16 && i <= 32) {
-      grid.className += 'row2 ';
-    }
-    grid.id = (`div${i}`);
-    grid.className += ('box');
-  }
-}
-
-createGrid(256);
-
-const varyColor = () => {
-  const color = Math.floor((Math.random()*1e6));
-  return '#'+color;
-}
-
-const boxes = document.querySelectorAll('.box');
-const len = boxes.length;
-
-const setBGColor = (color) => {
-
-  for (let i = 0; i < len; i++) {
-    boxes[i].style.backgroundColor = color;
-  }
-}
-
-setBGColor('#905858');
-
-let setColor = varyColor();
-
+// ---------- hover effect function-------------
 const hoverEffect = () => {
+  const boxes = document.querySelectorAll('.box');
+  const len = boxes.length;
   for (let i = 0; i < len; i++) {
     boxes[i].addEventListener('mouseover', function(e) {
       e.target.style.backgroundColor = setColor;
@@ -61,6 +54,42 @@ const hoverEffect = () => {
 
 hoverEffect();
 
+const createGrid = (gridSize) => {
+  const colSize = (1060 / gridSize) + 'px'; //100% divided by x divs
+  const rowSize = (960 / gridSize) + 'px';
+  container.style.gridTemplateColumns = `repeat(${gridSize}, ${colSize})`;
+  container.style.gridTemplateRows = `repeat(${gridSize}, ${rowSize})`;
+  container.style.gridColumnGap = '2px';
+  container.style.gridRowGap = '2px';
+  let grid;
+  let gridArea = gridSize * gridSize;
+  for (let i = 0; i < gridArea; i++) {
+    grid = document.createElement('div');
+    container.appendChild(grid);
+    grid.id = (`div${i}`);
+    grid.className += ('box');
+    grid.style.borderRadius = '100%';
+    grid.style.backgroundColor = bgColor;
+    hoverEffect();
+  }
+}
+
+createGrid(gridSize);
+
+//  -------------- change/ set pen color ------
+  let setColor = varyColor();
+
+
+// ------remove grid---------------------------
+const removeGrid = () => {
+  console.log(container);
+  while (container.firstElementChild) {
+    container.removeChild(container.firstElementChild);
+  }
+
+}
+// ------ buttons -----------------------------
+
 const createButtons = (num) => {
   let btn;
   let p;
@@ -69,42 +98,65 @@ const createButtons = (num) => {
     p = document.createElement('p');
     rightContainer.appendChild(btn);
     rightContainer.appendChild(p);
-    console.log(btn);
     btn.className = 'btn';
     btn.id ='btn'+ i;
     btn.style.width = '160px;'
     btn.style.height = '100px;'
     btn.innerHTML = 'I\'m  a button';
     btn.style.padding = '20px';
-    btn.style.background = '#b5e0ba';
+    btn.style.background = color2;
     btn.style.borderRadius = '25px';
-    btn.style.fontSize = '28px';
-    btn.style.margin = "0 0 200px";
-
+    btn.style.fontSize = '40px';
+    btn.style.margin = "0 0 100px";
+    btn.style.cursor = 'pointer';
+    btn.style.transition = '0.2s';
+    btn.style.boxShadow = `${color3} 1px 1px 10px 10px`;
   }
 }
 
-createButtons(3);
+createButtons(numOfButtons);
 
-// btn1.id = 'btn1';
-// btn1.class = 'btn';
-// btn1.style.backgroundColor = '#b5e0ba';
-// btn1.style.color = '#905858'
-// btn1.style.width = '200px';
-// btn1.style.height = '150px';
-// btn1.style.fontSize = '28px';
-// btn1.innerHTML = 'Click me to change pen color';
+const btn0 = document.getElementById('btn0');
+const btn1 = document.getElementById('btn1');
+const btn2 = document.getElementById('btn1');
+const btns = document.querySelectorAll('.btn')
 
-// const btns = querySelectorAll('btn');
+const setButtonEffects = (num) => {
+  for (let i = 0; i < num; i++) {
+    btns[i].addEventListener('mousedown', (e) => {
+      btns[i].style.background = color1;
+      console.log(e.target)
+    })
+    btns[i].addEventListener('mouseup', (e) => {
+      btns[i].style.background = color2;
+    })
+    btns[i].addEventListener('mouseenter', (e) => {
+      btns[i].style.transform = ('scale(1.2)');
+      btns[i].style.boxShadow = (`${color4} 2px 2px 100px`);
+    })
+    btns[i].addEventListener('mouseleave', (e) => {
+      btns[i].style.transform = ('scale(1.0)');
+      btns[i].style.boxShadow = (`${color3} 1px 1px 10px 10px`)
+    })
+  }
+}
 
+setButtonEffects(numOfButtons);
 
+btn0.innerHTML = 'Click to change grid size';
+btn0.addEventListener('click', (e) => {
+  let newGridSize = prompt('New grid size: How many units per side?');
+  removeGrid();
+  createGrid(newGridSize);
+  const boxes = document.querySelectorAll('.box');
+})
 
-
-
-
-
-
-
+btn1.innerHTML = 'Click to change to random pen color';
+btn1.addEventListener('click', (e) => {
+  setColor = varyColor();
+  console.log(setColor);
+  bleep.play();
+})
 
 
 
