@@ -8,20 +8,11 @@ const color5 = '#33313b';
 const color6 = '#cdffeb'; //button font
 
 const varyColor = () => {
-  let color = Math.floor((Math.random()*1e5));
-  const hue = Math.floor((Math.random()*6));
-  console.log(color)
-  if (color.toString().length === 4) {
-    color = 'f'+color;
-  }
-    switch (hue) {
-      case 1: return '#f' + color;
-      case 2: return '#1' + color;
-      case 3: return '#0' + color;
-      case 4: return '#c' + color;
-      case 5: return '#b' + color;
-      default: return '#2' +color;
-    }
+  const r = Math.floor(Math.random()*256);
+  const g = Math.floor(Math.random()*256);
+  const b = Math.floor(Math.random()*256);
+  // convert to hex so that color selector shows random color (rgb just shows black in color selector)
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
 // --------- sound ----------------
@@ -85,7 +76,6 @@ const createGrid = (gridSize) => {
   for (let i = 0; i < gridArea; i++) {
     grid = document.createElement('div');
     container.appendChild(grid);
-    grid.id = (`div${i}`);
     grid.className += ('box');
     grid.style.borderRadius = '100%';
     grid.style.backgroundColor = bgColor;
@@ -104,14 +94,12 @@ const removeGrid = () => {
   while (container.firstElementChild) {
     container.removeChild(container.firstElementChild);
   }
-
 }
 
 // ------ buttons -----------------------------
 
 const createButtons = (num) => {
   let btn;
-  let p;
   for (let i = 0; i < num; i++) {
     btn = document.createElement('div');
     // p = document.createElement('p');
@@ -166,7 +154,6 @@ colorSelector.addEventListener('mouseout', (e) => {
   colorSelector.style.transform = ('scale(2.0)');
   colorSelector.style.boxShadow = (``)
 });
-
 
 const setButtonEffects = (num) => {
   for (let i = 0; i < num; i++) {
@@ -225,7 +212,6 @@ btn1.addEventListener('click', (e) => {
   reset.play();
   removeGrid();
   createGrid(16);
-  // const boxes = document.querySelectorAll('.box');
 });
 
 btn2.innerHTML = 'Click to toggle shape of grid units';
@@ -247,12 +233,12 @@ btn2.addEventListener('click', (e) => {
 btn3.innerHTML = 'Click to change to random pen color';
 btn3.addEventListener('click', (e) => {
   setColor = varyColor();
+  colorSelector.value = setColor;
   bleep.play();
 });
 
 colorSelector.addEventListener('click', (e) => brrp.play());
 colorSelector.addEventListener('change', (e) => {
-  console.log(colorSelector.value);
   setColor = colorSelector.value;
 });
 
