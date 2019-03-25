@@ -27,6 +27,15 @@ const varyColor = () => {
 // --------- sound ----------------
 const bleep = new Audio();
 bleep.src = 'lesser_vibes_HTIS_Buttons_59_013.mp3';
+const blip = new Audio();
+blip.src ='blip_generic_tone_001_17637.mp3';
+const blip2 = new Audio();
+blip2.src = 'blip_generic_tone_004_17640.mp3';
+const reset = new Audio();
+reset.src = 'cartoon_blink_x2_marimba_18052.mp3';
+const brrp = new Audio();
+brrp.src = 'cartoon_fast_shake_marimba_002_18059.mp3';
+
 
 // --------misc -------------------
 document.querySelector('h1').style.color = color1;
@@ -207,11 +216,13 @@ const gridSizePrompt = () => {
 
 btn0.innerHTML = 'Click to change grid size';
 btn0.addEventListener('click', (e) => {
+  blip.play();
   gridSizePrompt();
 });
 
 btn1.innerHTML = 'Click to reset';
 btn1.addEventListener('click', (e) => {
+  reset.play();
   removeGrid();
   createGrid(16);
   // const boxes = document.querySelectorAll('.box');
@@ -219,6 +230,7 @@ btn1.addEventListener('click', (e) => {
 
 btn2.innerHTML = 'Click to toggle shape of grid units';
 btn2.addEventListener('click', (e) => {
+  blip2.play();
   const boxes = document.querySelectorAll('.box');
   let newBorderRadius;
   console.log(boxes[0].style.borderRadius);
@@ -238,8 +250,7 @@ btn3.addEventListener('click', (e) => {
   bleep.play();
 });
 
-
-
+colorSelector.addEventListener('click', (e) => brrp.play());
 colorSelector.addEventListener('change', (e) => {
   console.log(colorSelector.value);
   setColor = colorSelector.value;
