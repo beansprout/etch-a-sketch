@@ -40,13 +40,13 @@ const rightContainer = document.getElementById('right-container');
 const instructions = document.createElement('p');
 rightContainer.appendChild(instructions);
 instructions.innerHTML = 'Instructions: Move the mouse around on the grid';
-instructions.style.fontSize = '24px'
+instructions.style.fontSize = '18px'
 instructions.style.color = color1;
 instructions.marginTop = '-30px';
 
 // define container as grid
 container.style.display = 'grid';
-container.style.width = '1060px';
+container.style.width = '800px';
 // set column and row sizes
 let gridSize = 16 // grid size example 2 equals 2x2 grid
 
@@ -65,8 +65,8 @@ hoverEffect();
 
 
 const createGrid = (gridSize) => {
-  const colSize = (960 / gridSize) + 'px'; //100% divided by x divs
-  const rowSize = (860 / gridSize) + 'px';
+  const colSize = (800 / gridSize) + 'px'; //100% divided by x divs
+  const rowSize = (760 / gridSize) + 'px';
   container.style.gridTemplateColumns = `repeat(${gridSize}, ${colSize})`;
   container.style.gridTemplateRows = `repeat(${gridSize}, ${rowSize})`;
   container.style.gridColumnGap = '2px';
@@ -113,9 +113,9 @@ const createButtons = (num) => {
     btn.style.padding = '20px';
     btn.style.background = color2;
     btn.style.borderRadius = '25px';
-    btn.style.fontSize = '28px';
+    btn.style.fontSize = '20px';
     btn.style.color = color6;
-    btn.style.margin = "0 0 30px";
+    btn.style.margin = "0 0 20px";
     btn.style.cursor = 'pointer';
     btn.style.transition = '0.1s';
   }
@@ -131,13 +131,10 @@ const btns = document.querySelectorAll('.btn')
 const text1 = document.createElement('p');
 const text2 = document.createElement('p');
 text1.innerHTML = 'To choose pen color<br>click the box below';
-text2.innerHTML = '';
 text1.style.color = color2;
-text2.style.color = color2;
-text1.style.fontSize = '28px';
-text2.style.fontSize = '28px'
+text1.style.fontSize = '20px';
 rightContainer.appendChild(text1);
-rightContainer.appendChild(text2);
+
 // color selector -----------------------------
 const colorSelector = document.createElement('input');
 colorSelector.type = 'color';
