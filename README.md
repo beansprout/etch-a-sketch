@@ -1,4 +1,5 @@
 #Etch-a-Sketch Project Instructions
+https://www.theodinproject.com/courses/web-development-101/lessons/etch-a-sketch-project
 
 1. Create a webpage with a 16x16 grid of square divs
 
