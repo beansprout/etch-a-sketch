@@ -1,40 +1,31 @@
 #Etch-a-Sketch Project Instructions
-https://www.theodinproject.com/courses/web-development-101/lessons/etch-a-sketch-project
 
-1. Create a webpage with a 16x16 grid of square divs
+## What is this:
 
-- Create the divs using JavaScript… don’t try making them by hand with copy and pasting in your html file!
-- Best to put your grid squares inside another “container” div (that one can go directly in your html)
+Drawing game interface similar to etch-a-sketch in that the drawing is continuous.  When the mouse hovers over a grid unit the unit changes color.
 
-- There are several different ways to make the divs appear as a grid (verses just one on each line) feel free to use any or play with each of them:
-  - float/clear
-  - inline-block
-  - flexbox
-  - CSS Grid
+Created almost entirely with vanilla JS.  Tried not use CSS for anything except grid container.  Almost all styling done with Javascript (as per the project challenge instructions).
 
-- Be careful with borders and margins, they can adjust the size of the squares!
+## How I created this:
+-created a 16x16 grid of circle shaped divs (using CSS grid)
+-set up a hover effect where the color changed on mousover
+-set up buttons for...
+  1. grid size change
+  2. reset button to reset the grid
+  3. change grid unit shape (toggles to change from circle to square and back again)
+  4. choosing a color randomly
+  5. choosing a specific color
 
-- “OMG, Why isn’t my grid being created???”
-  - Open your browser’s developer tools
-  - Check if there are any errors in the JavaScript console
-  - Check your “elements” pane to see if the elements have actually shown up but are somehow hidden.
-  - Go willy-nilly and add console.log statements in your JavaScript to see if it’s actually being loaded.
+###Notes:
+- Color changes accomplished by using javascript to change the background color
+- shape changes - javascript used to change border-radius of class
+- random color changes were a challenge because I was used to using hex for color.  I switched to using rgb to make colors truly random, but when I did that, the color selector box didn't work properly anymore.  I got around that by learning how to convert rgb to hex code so the color selector box reflected the random color instead of black.
+- learned how to incorporate sound effects (surprisingly so easy!)
+- used transition and transform to make buttons grow on hover
+- grid resize is slow over 35 x 35 - I speculate it's because I am restyling using javascript?  I imagine using CSS would make it much faster.
 
-2. Set up a “hover” effect so that the grid divs change color when your mouse passes over them, leaving a (pixelated) trail through your grid like a pen would.
+Credits:
 
-- Hint: “hovering” is what happens when your mouse enters a div and ends when your mouse leaves it.. you can set up event listeners for either of those events as a starting point.
+project idea from: https://www.theodinproject.com/courses/web-development-101/lessons/etch-a-sketch-project
 
-- There are multiple ways to change the color of the divs, including:
-  - adding a new class to the div
-  - changing the div’s background color using JavaScript.
-
-3. Add a button to the top of the screen which will clear the current grid and send the user a popup asking for how many squares per side to make the new grid. Once entered the new grid should be generated in the same total space as before (e.g. 960px wide) and now you’ve got a new sketch pad.
-
-- Research button tags in HTML and how you can make a JavaScript function run when one is clicked.
-- Also check out prompts
-- You should be able to enter 64 and have a brand new 64x64 grid pop up without changing the total amount of pixels used
-- (Optional): Instead of just changing the color of your grid from black to white (for example) have each pass through it with the mouse change to a completely random RGB value. Then try having each pass just add another 10% of black to it so that only after 10 passes is the square completely black.
-
-4. Push your project to GitHub!
-
-Notes: added extras including sounde effects for buttons courtesy of https://zapsplat.com
+Sound effects for buttons courtesy of https://zapsplat.com
